@@ -1,24 +1,26 @@
 #-------ELCRYPT-------
 # Made by: ELChris414
 # Version: 0.0.1
-from __future__ import print_function
 from sys import *
+
+import math
 
 def combineCharacters(character1, character2):
     result = character1 + character2
-    if (result > 95):
-        result -= 95
+    if (result > 94):
+        result -= 94
     return result
 
 def hash(input, desiredLength):
     desiredLength = int(desiredLength)
     result = []
     finalResult = ""
-    acceptedCharacters = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_`~,.<>/?\|[]{}=+;: ") # 95 characters
+    allowedCharacters = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_`~,.<>/?\|[]{}=+;: \"\'") # 95 characters
+    acceptedCharacters = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_`~,.<>/?\|[]{}=+;:\"\'") # 94 characters
     characters = list(input)
     length = len(input)
     for char in characters:
-        if char not in acceptedCharacters:
+        if char not in allowedCharacters:
             return "errored"
     current = 0
     for x in range(0, desiredLength):
@@ -36,7 +38,14 @@ def hash(input, desiredLength):
                 if x == (desiredLength - 1):
                     x = 0
     for x in range(0, desiredLength):
+        if (len(result) < x+2 or len(result) < x+3):
+            num = result[x]
+        else:
+            num = math.floor((result[x] + result[x+1] + result[x+2] + 3) / 3)
+        result.insert(x, combineCharacters(result[x], num))
+        result.insert(x + 1, combineCharacters(result[x + 1], num))
+        result.insert(x + 2, combineCharacters(result[x + 2], num))
+        x += 2
+    for x in range(0, desiredLength):
         finalResult = finalResult + acceptedCharacters[result[x] - 1]
     return finalResult
-
-#print(hash(argv[1],int(argv[2])))
