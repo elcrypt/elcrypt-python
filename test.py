@@ -2,7 +2,7 @@ import os
 import elcrypt
 import csv
 
-#os.system("git clone --depth=50 --branch=master https://github.com/elcrypt/elcrypt-tests.git")
+os.system("git clone --depth=50 --branch=master https://github.com/elcrypt/elcrypt-tests.git")
 
 with open('elcrypt/elcrypt-tests/tests.csv', 'r') as datafile:
     datareader = csv.reader(datafile,delimiter=',',quotechar=' ')
