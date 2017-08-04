@@ -49,3 +49,5 @@ def hash(input, desiredLength):
     for x in range(0, desiredLength):
         finalResult = finalResult + acceptedCharacters[result[x] - 1]
     return finalResult
+
+#print(hash(argv[1],argv[2]))
