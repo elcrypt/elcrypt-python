@@ -36,7 +36,7 @@ def hash(input, desiredLength):
                 if x == (desiredLength - 1):
                     x = 0
     for x in range(0, desiredLength):
-        finalResult = finalResult + acceptedCharacters[result[x]]
+        finalResult = finalResult + acceptedCharacters[result[x] - 1]
     return finalResult
 
 #print(hash(argv[1],int(argv[2])))
