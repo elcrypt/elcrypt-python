@@ -1,0 +1,42 @@
+#-------ELCRYPT-------
+# Made by: ELChris414
+# Version: 0.0.1
+from __future__ import print_function
+from sys import *
+
+def combineCharacters(character1, character2):
+    result = character1 + character2
+    if (result > 95):
+        result -= 95
+    return result
+
+def hash(input, desiredLength):
+    desiredLength = int(desiredLength)
+    result = []
+    finalResult = ""
+    acceptedCharacters = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_`~,.<>/?\|[]{}=+;: ") # 95 characters
+    characters = list(input)
+    length = len(input)
+    for char in characters:
+        if char not in acceptedCharacters:
+            return "errored"
+    current = 0
+    for x in range(0, desiredLength):
+        char = input[current]
+        result.insert(x,acceptedCharacters.index(char) + 1)
+        current += 1
+        if current == len(input):
+            current = 0
+        if x == (desiredLength - 1) and current != 0:
+            x = -1
+            while current != len(input):
+                x += 1
+                result.insert(x, combineCharacters(result[x], acceptedCharacters.index(characters[current]) + 1))
+                current += 1
+                if x == (desiredLength - 1):
+                    x = 0
+    for x in range(0, desiredLength):
+        finalResult = finalResult + acceptedCharacters[result[x] - 1]
+    return finalResult
+
+#print(hash(argv[1],int(argv[2])))
