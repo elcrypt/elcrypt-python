@@ -47,7 +47,7 @@ def hash(input, desiredLength):
         result.insert(x + 2, combineCharacters(result[x + 2], num))
         x += 2
     for x in range(0, desiredLength):
-        finalResult = finalResult + acceptedCharacters[result[x] - 1]
+        finalResult += acceptedCharacters[int(result[x]) - 1]
     return finalResult
 
-#print(hash(argv[1],argv[2]))
+print(hash(argv[1],argv[2]))
