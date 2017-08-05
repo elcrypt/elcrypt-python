@@ -15,11 +15,11 @@ def hash(input, desiredLength):
     desiredLength = int(desiredLength)
     result = []
     finalResult = ""
-    allowedCharacters = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_`~,.<>/?\|[]{}=+;: \"\'") # 95 characters
+    acceptedCharacters = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_`~,.<>/?\|[]{}=+;: \"\'") # 95 characters
     characters = list(input)
     length = len(input)
     for char in characters:
-        if char not in allowedCharacters:
+        if char not in acceptedCharacters:
             return "errored"
     current = 0
     for x in range(0, desiredLength):
