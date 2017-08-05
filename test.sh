@@ -22,5 +22,5 @@ while read line; do
 			exit 1
 		fi
 		current=-1
-	fi	
+	fi
 done < "elcrypt-tests/tests.csv"
