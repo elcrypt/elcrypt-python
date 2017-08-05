@@ -4,14 +4,14 @@ git clone --depth=50 --branch=master https://github.com/elcrypt/elcrypt-tests.gi
 
 while read line; do
 	input=$(echo -n "$line" | cut -d ' ' -f 1)
-	salt=$(echo -n "$line" | cut -d ' ' -f 2 | cut -c 2- | rev | cut -c 2- | rev)
+	length=$(echo -n "$line" | cut -d ' ' -f 2 | cut -c 2- | rev | cut -c 2- | rev)
 	expected=$(echo -n "$line" | cut -d ' ' -f 3)
 
-	hash=$(python elcrypt.py "$input" "$salt")
+	hash=$(python elcrypt.py "$input" "$length")
 
 	if [ "$hash" != "$expected" ]; then
 		echo "Input: ($input)"
-		echo "Salt: ($salt)"
+		echo "Length: ($length)"
 		echo "Output:   $hash"
 		echo "Expected: $expected"
 		exit 1
