@@ -29,22 +29,26 @@ def hash(input, desiredLength):
         if current == len(input):
             current = 0
         if x == (desiredLength - 1) and current != 0:
-            x = -1
+            y = -1
             while current != len(input):
-                x += 1
-                result.insert(x, combineCharacters(result[x], acceptedCharacters.index(characters[current]) + 1))
+                y += 1
+                result[y] = combineCharacters(result[y], acceptedCharacters.index(characters[current]) + 1)
                 current += 1
-                if x == (desiredLength - 1):
-                    x = 0
+                if y == (desiredLength - 1):
+                    y = 0
     for x in range(0, desiredLength):
-        if (len(result) < x+2 or len(result) < x+3):
+        if (len(result) < x+2):
             num = result[x]
+            result[x] = combineCharacters(result[x], num)
+        elif (len(result) < x+3):
+            num = math.floor((result[x] + result[x+1] + 2) / 2)
+            result[x] = combineCharacters(result[x], num)
+            result[x + 1] = combineCharacters(result[x + 1], num)
         else:
             num = math.floor((result[x] + result[x+1] + result[x+2] + 3) / 3)
-        result.insert(x, combineCharacters(result[x], num))
-        result.insert(x + 1, combineCharacters(result[x + 1], num))
-        result.insert(x + 2, combineCharacters(result[x + 2], num))
-        x += 2
+            result[x] = combineCharacters(result[x], num)
+            result[x + 1] = combineCharacters(result[x + 1], num)
+            result[x + 2] = combineCharacters(result[x + 2], num)
     for x in range(0, desiredLength):
         finalResult += acceptedCharacters[int(result[x]) - 1]
     return finalResult
