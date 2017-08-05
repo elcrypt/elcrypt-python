@@ -7,8 +7,8 @@ import math
 
 def combineCharacters(character1, character2):
     result = character1 + character2
-    if (result > 94):
-        result -= 94
+    if (result > 95):
+        result -= 95
     return result
 
 def hash(input, desiredLength):
@@ -16,7 +16,6 @@ def hash(input, desiredLength):
     result = []
     finalResult = ""
     allowedCharacters = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_`~,.<>/?\|[]{}=+;: \"\'") # 95 characters
-    acceptedCharacters = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_`~,.<>/?\|[]{}=+;:\"\'") # 94 characters
     characters = list(input)
     length = len(input)
     for char in characters:
@@ -50,4 +49,5 @@ def hash(input, desiredLength):
         finalResult += acceptedCharacters[int(result[x]) - 1]
     return finalResult
 
-print(hash(argv[1],argv[2]))
+if (len(argv) == 3):
+    print(hash(argv[1],argv[2]))

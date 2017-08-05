@@ -2,18 +2,25 @@
 
 git clone --depth=50 --branch=master https://github.com/elcrypt/elcrypt-tests.git
 
+current=0
 while read line; do
-	input=$(echo -n "$line" | cut -d ' ' -f 1)
-	length=$(echo -n "$line" | cut -d ' ' -f 2 | cut -c 2- | rev | cut -c 2- | rev)
-	expected=$(echo -n "$line" | cut -d ' ' -f 3)
+	if [ "$current" == 0 ]; then
+		input=$(echo -n "$line")
+	elif [ "$current" == 1 ]; then
+		length=$(echo -n "$line")
+	elif [ "$current" == 2 ]; then
+		expected=$(echo -n "$line")
+	elif [ "$current" == 3 ]; then
+		hash=$(python elcrypt.py "$input" "$length")
 
-	hash=$(python elcrypt.py "$input" "$length")
-
-	if [ "$hash" != "$expected" ]; then
-		echo "Input: ($input)"
-		echo "Length: ($length)"
-		echo "Output:   $hash"
-		echo "Expected: $expected"
-		exit 1
+		if [ "$hash" != "$expected" ]; then
+			echo "Input: ($input)"
+			echo "Length: ($length)"
+			echo "Output:   $hash"
+			echo "Expected: $expected"
+			exit 1
+		fi
+		"$current" = 0
 	fi
+	"$current" = "$current" + 1
 done < "elcrypt-tests/tests.csv"
