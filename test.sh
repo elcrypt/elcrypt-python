@@ -4,13 +4,13 @@ git clone --depth=50 --branch=master https://github.com/elcrypt/elcrypt-tests.gi
 
 current=0
 while read line; do
-	if [ "$current" == 0 ]; then
+	if [ $current == 0 ]; then
 		input=$(echo -n "$line")
-	elif [ "$current" == 1 ]; then
+	elif [ $current == 1 ]; then
 		length=$(echo -n "$line")
-	elif [ "$current" == 2 ]; then
+	elif [ $current == 2 ]; then
 		expected=$(echo -n "$line")
-	elif [ "$current" == 3 ]; then
+	elif [ $current == 3 ]; then
 		hash=$(python elcrypt.py "$input" "$length")
 
 		if [ "$hash" != "$expected" ]; then
@@ -20,7 +20,7 @@ while read line; do
 			echo "Expected: $expected"
 			exit 1
 		fi
-		"$current" = 0
+		current=0
 	fi
-	"$current" = "$current" + 1
+	current=$current+1
 done < "elcrypt-tests/tests.csv"
