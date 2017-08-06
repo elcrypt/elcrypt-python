@@ -55,7 +55,7 @@ def hash(input, desiredLength):
         inputNumber = combineCharacters(inputNumber, acceptedCharacters.index(input[x]) + 1)
     for x in range(0, desiredLength):
         result[x] = combineCharacters(result[x], inputNumber)
-        result[x] = combineCharacters(result[x], len(input) * desiredLength)
+        result[x] = combineCharacters(result[x], len(input) * (desiredLength - x))
     for x in range(0, desiredLength):
         finalResult += acceptedCharacters[int(result[x]) - 1]
     return finalResult
