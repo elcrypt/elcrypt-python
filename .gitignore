@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Testing
+comboloop
+collisions
+findcollisions.sh
+elcrypt-tests/
