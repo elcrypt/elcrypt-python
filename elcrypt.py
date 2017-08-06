@@ -1,13 +1,13 @@
 #-------ELCRYPT-------
 # Made by: ELChris414
 # Version: 0.0.1
-from sys import *
+from sys import argv
 
 import math
 
 def combineCharacters(character1, character2):
     result = character1 + character2
-    if (result > 95):
+    while (result > 95):
         result -= 95
     return result
 
@@ -55,6 +55,7 @@ def hash(input, desiredLength):
         inputNumber = combineCharacters(inputNumber, acceptedCharacters.index(input[x]) + 1)
     for x in range(0, desiredLength):
         result[x] = combineCharacters(result[x], inputNumber)
+        result[x] = combineCharacters(result[x], len(input) * desiredLength)
     for x in range(0, desiredLength):
         finalResult += acceptedCharacters[int(result[x]) - 1]
     return finalResult
