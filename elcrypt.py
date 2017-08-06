@@ -35,20 +35,26 @@ def hash(input, desiredLength):
                 result[y] = combineCharacters(result[y], acceptedCharacters.index(characters[current]) + 1)
                 current += 1
                 if y == (desiredLength - 1):
-                    y = 0
+                    y = -1
     for x in range(0, desiredLength):
         if (len(result) < x+2):
-            num = result[x]
-            result[x] = combineCharacters(result[x], num)
+            continue
         elif (len(result) < x+3):
-            num = math.floor((result[x] + result[x+1] + 2) / 2)
+            num = math.floor((result[x] + result[x+1]) / 2)
             result[x] = combineCharacters(result[x], num)
             result[x + 1] = combineCharacters(result[x + 1], num)
         else:
-            num = math.floor((result[x] + result[x+1] + result[x+2] + 3) / 3)
+            num = math.floor((result[x] + result[x+1] + result[x+2]) / 3)
             result[x] = combineCharacters(result[x], num)
             result[x + 1] = combineCharacters(result[x + 1], num)
             result[x + 2] = combineCharacters(result[x + 2], num)
+    for x in range(0, desiredLength):
+        result[x] = combineCharacters(math.floor((result[x] + x + 1) / 2), result[x])
+    inputNumber = 0
+    for x in range(0, len(input)):
+        inputNumber = combineCharacters(inputNumber, acceptedCharacters.index(input[x]) + 1)
+    for x in range(0, desiredLength):
+        result[x] = combineCharacters(result[x], inputNumber)
     for x in range(0, desiredLength):
         finalResult += acceptedCharacters[int(result[x]) - 1]
     return finalResult
