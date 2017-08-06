@@ -1,6 +1,6 @@
 #-------ELCRYPT-------
 # Made by: ELChris414
-# Version: 0.0.1
+# Version: 7.0
 from sys import argv
 
 import math
